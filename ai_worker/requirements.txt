@@ -1,0 +1,7 @@
+tensorflow==2.21.0
+numpy
+Pillow
+pika
+boto3
+psycopg2-binary
+python-dotenv

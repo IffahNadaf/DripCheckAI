@@ -69,6 +69,16 @@ async function setupDatabase() {
       created_at TIMESTAMP DEFAULT NOW()
     );
   `);
+
+  await pool.query(`
+  ALTER TABLE classification_results
+  ADD COLUMN IF NOT EXISTS category TEXT,
+  ADD COLUMN IF NOT EXISTS category_id INTEGER,
+  ADD COLUMN IF NOT EXISTS category_confidence NUMERIC,
+  ADD COLUMN IF NOT EXISTS attributes JSONB,
+  ADD COLUMN IF NOT EXISTS top_attribute_candidates JSONB;
+`);
+
   console.log('Database table ready.');
 }
 setupDatabase().catch(err => console.error('Database setup failed:', err));
@@ -107,6 +117,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     const job = {
       job_id: jobId,
       image_url: uploadResult.Location,
+      image_key: req.file.filename,
       status: 'pending',
       timestamp: new Date().toISOString(),
     };
