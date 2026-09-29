@@ -1,20 +1,34 @@
-# Dependencies
+# Environment / secrets
+.env
+*.env
+
+# Node
 node_modules/
 
-# Environment variables (contains MinIO, Postgres, RabbitMQ credentials)
-.env
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
 
-# Uploaded files (temp storage before pushing to MinIO)
+# Temporary uploads
 uploads/
 
 # Logs
 *.log
-npm-debug.log*
 
-# OS files
+# OS / editor files
 .DS_Store
 Thumbs.db
 
-# Editor folders
-.vscode/
-.idea/
+# Large datasets
+data/
+dataset/
+datasets/
+
+# Deep learning training caches
+*.h5
+*.ckpt
+
+# Local database / storage folders
+minio-data/
